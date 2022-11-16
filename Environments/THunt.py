@@ -1,6 +1,7 @@
 import numpy as np
 from enum import Enum
 
+
 def get_in_bounds (location: tuple([int, int]), bounds: tuple[int, int]) -> tuple([int, int]):
     """
     determines if a location is within 1 and the upper bounds given by bounds.
@@ -15,9 +16,12 @@ def get_in_bounds (location: tuple([int, int]), bounds: tuple[int, int]) -> tupl
         new location: the modified (if necessary) new location
     """
 
+    direction_map = {TreasureHunt.Direction.UP: (0, -1)}
+
     return None
 
-class Treasure_hunt:
+
+class TreasureHunt:
 
     class Direction(Enum):
 
@@ -28,7 +32,9 @@ class Treasure_hunt:
 
     def __init__(self, field_size: tuple = (5, 5), treasure_location: tuple = (2, 2)):
         """
-        creates a treasure hunt object. The treasure is hidden at the treasure location
+        creates a treasure hunt object. The treasure is hidden at the treasure location. The grid
+        is defined as having coordinates with (1,1) being the top-left corner of the grid, and (X, X)
+        being the lower right-hand corner of an X-by-X grid
 
         :treasure location: the location of the treasure to find
         :field_size: tuple with the maximum value of each dimension

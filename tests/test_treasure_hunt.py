@@ -1,5 +1,5 @@
 from unittest import TestCase
-from Environments.THunt import Treasure_hunt, get_in_bounds
+from Environments.THunt import TreasureHunt, get_in_bounds
 import numpy as np
 
 
@@ -10,9 +10,9 @@ class TreasureTest(TestCase):
         creates a default treasure hunt object, with a 6x6 grid and the treasure
         located in location 3,3
         """
-        self.hunting_ground = Treasure_hunt(field_size=(6, 6),
-                                            treasure_location=(3, 3),
-                                            )
+        self.hunting_ground = TreasureHunt(field_size=(6, 6),
+                                           treasure_location=(3, 3),
+                                           )
 
     def test_get_in_bounds(self) -> None:
         """
