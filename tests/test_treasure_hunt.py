@@ -111,7 +111,15 @@ class TreasureTest(TestCase):
 
 
     def test_get_current_state(self) -> None:
+        """
+        tests that the correct initial state is returned
+        tests that a mid-play state is correctly returned
+        """
 
-        pass
+        self.assertSequenceEqual((1, 1), self.hunting_ground.location, f"Incorrect state returned")
+        for _ in range (3):
+            _, _, _ = self.hunting_ground.take_step(self.hunting_ground.Direction.RIGHT)
+        self.assertSequenceEqual((4, 1), self.hunting_ground.location,
+                                 f"Incorrect dtate returned")
 
 
