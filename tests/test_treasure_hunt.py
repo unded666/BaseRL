@@ -93,7 +93,10 @@ class TreasureTest(TestCase):
         self.assertEqual(reward, 91, f"treasure reward incorrectly returned")
         self.assertTrue(done, f"finished episode incorrectly reported")
 
-    def test_reset_prize(self) -> None:
+    def test_reset(self) -> None:
+        """
+        Resets the environment, returning the
+        """
 
         pass
 

@@ -80,9 +80,23 @@ class TreasureHunt:
 
         return reward, done, self.location
 
-    def reset_prize(self, treasure_location: tuple) -> None:
+    def reset(self, treasure_location: tuple[int, int] = None) -> None:
+        """
+        Resets the environment, resetting the steps taken, the agent location and the treasure location.
+        If a treasure location is given, and is within the acceptable bounds, then the treasure is
+        placed at the indicated location, else a random treasure location is generated.
 
-        return None
+        parameters:
+            treasure_location: coordinates of the new treasure location to be placed
+        """
+
+        self.steps_taken = 0
+
+        if get_in_bounds(treasure_location, self.field_dimensions) == treasure_location and treasure_location:
+            self.treasure = treasure_location
+        else:
+            # randomise location
+            self.treasure = tuple(np.random.randint((0, 0), np.add(self.field_dimensions), (1, 1)))
 
     def get_current_state(self) -> int:
 
