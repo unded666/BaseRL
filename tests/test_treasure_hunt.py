@@ -21,8 +21,12 @@ class TreasureTest(TestCase):
         tests whether get_in_bounds correctly lowers a Y value from out of bounds
         tests whether get_in_bounds correctly raises an X value from out of bounds
         tests whether get_in_bounds correctly raises a Y value from out of bounds
-
         """
+
+        bounds = (5, 5)
+        valid_location = (3, 4)
+        test_location = get_in_bounds(valid_location, bounds)
+        self.assertCountEqual(valid_location, test_location, f"valid location incorrectly modified")
 
     def test_initialisation(self) -> None:
         """
