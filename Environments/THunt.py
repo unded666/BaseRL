@@ -1,6 +1,14 @@
 import numpy as np
+from enum import Enum
 
-class treasure_hunt:
+class Treasure_hunt:
+
+    class Direction(Enum):
+
+        UP = 0
+        LEFT = 1
+        RIGHT = 2
+        DOWN = 3
 
     def __init__(self, field_size: tuple = (5, 5), treasure_location: tuple = (2, 2)):
         """
@@ -15,7 +23,12 @@ class treasure_hunt:
         self.location = (1, 1)
         self.steps_taken = 0
 
-    def take_step(self, action: int) -> int:
+    def take_step(self, action: Direction) -> int:
+        """
+        takes a step based on a
+
+        """
+
 
         return None
 
