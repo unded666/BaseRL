@@ -95,7 +95,9 @@ class TreasureTest(TestCase):
 
     def test_reset(self) -> None:
         """
-        Resets the environment, returning the
+        Tests that reset puts the agent back in the starting square (1,1)
+        Tests that reset places the treasure in the correct specified location
+        Tests that reset places the treasure in a random location correctly
         """
 
         pass
