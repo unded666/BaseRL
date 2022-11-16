@@ -91,12 +91,16 @@ class TreasureHunt:
         """
 
         self.steps_taken = 0
+        self.location = (1, 1)
 
-        if get_in_bounds(treasure_location, self.field_dimensions) == treasure_location and treasure_location:
-            self.treasure = treasure_location
-        else:
+        randomise = True
+        if treasure_location:
+            if get_in_bounds(treasure_location, self.field_dimensions) == treasure_location:
+                randomise = False
+                self.treasure = treasure_location
+        if randomise:
             # randomise location
-            self.treasure = tuple(np.random.randint((0, 0), np.add(self.field_dimensions), (1, 1)))
+            self.treasure = tuple(np.random.randint((1, 1), np.add(self.field_dimensions, (1, 1))))
 
     def get_current_state(self) -> int:
 

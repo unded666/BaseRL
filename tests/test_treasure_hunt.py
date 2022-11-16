@@ -100,7 +100,15 @@ class TreasureTest(TestCase):
         Tests that reset places the treasure in a random location correctly
         """
 
-        pass
+        _, _, _ = self.hunting_ground.take_step(self.hunting_ground.Direction.DOWN)
+        self.hunting_ground.reset((4, 4))
+        self.assertSequenceEqual((1, 1), self.hunting_ground.location, f"Agent location incorrectly reset")
+        self.assertSequenceEqual((4, 4), self.hunting_ground.treasure, f"Specified treasure incorrectly placed")
+        np.random.seed(42)
+        self.hunting_ground.reset()
+        self.assertSequenceEqual((4, 5), self.hunting_ground.treasure,
+                                 f"reset improperly randomising treasure placement")
+
 
     def test_get_current_state(self) -> None:
 
