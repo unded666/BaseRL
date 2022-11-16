@@ -10,8 +10,10 @@ class treasure_hunt:
         :field_size: tuple with the maximum value of each dimension
         """
 
+        self.field_dimensions = field_size
         self.treasure = treasure_location
         self.location = (1, 1)
+        self.steps_taken = 0
 
     def take_step(self, action: int) -> int:
 
