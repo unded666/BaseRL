@@ -1,8 +1,9 @@
 import numpy as np
+from copy import deepcopy
 from enum import Enum
 
 
-def get_in_bounds (location: tuple([int, int]), bounds: tuple[int, int]) -> tuple([int, int]):
+def get_in_bounds(location: tuple([int, int]), bounds: tuple[int, int]) -> tuple([int, int]):
     """
     determines if a location is within 1 and the upper bounds given by bounds.
     If the value is outside of those bounds, it is moved the shortest distance
@@ -16,10 +17,14 @@ def get_in_bounds (location: tuple([int, int]), bounds: tuple[int, int]) -> tupl
         new location: the modified (if necessary) new location
     """
 
-    direction_map = {TreasureHunt.Direction.UP: (0, -1)}
+    output_location = list(deepcopy(location))
+    for index, (location_i, bounds_i) in enumerate(zip(location, bounds)):
+        # deal with values less than 1
+        output_location[index] = max(1, location_i)
+        # deal with values greater than the boundary
+        output_location[index] = min(output_location[index], bounds_i)
 
-    return None
-
+    return tuple(output_location)
 
 class TreasureHunt:
 
@@ -58,6 +63,11 @@ class TreasureHunt:
             done: boolean value showing the location
             state: location of the agent
         """
+
+        direction_map = {TreasureHunt.Direction.UP: (0, -1),
+                         TreasureHunt.Direction.DOWN: (0, 1),
+                         TreasureHunt.Direction.LEFT: (-1, 0),
+                         TreasureHunt.Direction.RIGHT: (1, 0)}
 
         return None
 

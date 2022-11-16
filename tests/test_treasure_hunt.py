@@ -27,6 +27,22 @@ class TreasureTest(TestCase):
         valid_location = (3, 4)
         test_location = get_in_bounds(valid_location, bounds)
         self.assertCountEqual(valid_location, test_location, f"valid location incorrectly modified")
+        invalid_x_low = (-3, 4)
+        test_location = get_in_bounds(invalid_x_low, bounds)
+        self.assertCountEqual(test_location, (1, 4),
+                              f"invalid low X not correctly raised, returned location {test_location}")
+        invalid_x_high = (7, 4)
+        test_location = get_in_bounds(invalid_x_high, bounds)
+        self.assertCountEqual(test_location, (5, 4),
+                              f"invalid high X not correctly lowered, returned location {test_location}")
+        invalid_y_low = (3, 0)
+        test_location = get_in_bounds(invalid_y_low, bounds)
+        self.assertCountEqual(test_location, (3, 1),
+                              f"invalid low Y not correctly raised, returned location {test_location}")
+        invalid_y_high = (3, 22)
+        test_location = get_in_bounds(invalid_y_high, bounds)
+        self.assertCountEqual(test_location, (3, 5),
+                              f"invalid high Y not correctly lowered, returned location {test_location}")
 
     def test_initialisation(self) -> None:
         """
