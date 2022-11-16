@@ -5,7 +5,9 @@ import numpy as np
 class TreasureTest(TestCase):
     def SetUp(self) -> None:
 
-        pass
+        self.hunting_ground = treasure_hunt(field_size=(6, 6),
+                                            treasure_location=(3, 3),
+                                            )
 
     def test_initialisation(self) -> None:
 
