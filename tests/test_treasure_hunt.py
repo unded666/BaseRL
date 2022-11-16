@@ -34,6 +34,15 @@ class TreasureTest(TestCase):
 
 
     def test_take_step(self) -> None:
+        """
+        tests that a 0 moves up correctly
+        tests that a 1 moves right correctly
+        tests that a 2 moves down correctly
+        tests that a 3 moves left correctly
+        tests that a move into a boundary does not move
+        tests that a value outside of the correct values does not move
+        tests that taking a step returns the correct value
+        """
 
         pass
 
