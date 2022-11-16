@@ -80,7 +80,18 @@ class TreasureTest(TestCase):
         _, _, location = self.hunting_ground.take_step(self.hunting_ground.Direction.DOWN)
         self.assertSequenceEqual((2, 2), location, f"Down move taken incorrectly")
         _, _, location = self.hunting_ground.take_step(self.hunting_ground.Direction.LEFT)
-        self.assertSequenceEqual((2, 2), location, f"Left move taken incorrectly")
+        self.assertSequenceEqual((1, 2), location, f"Left move taken incorrectly")
+        _, _, location = self.hunting_ground.take_step(self.hunting_ground.Direction.UP)
+        self.assertSequenceEqual((1, 1), location, f"Up move taken incorrectly")
+        reward, _, location = self.hunting_ground.take_step(self.hunting_ground.Direction.UP)
+        self.assertSequenceEqual((1, 1), location, f"Boundary move not treated correctly")
+        self.assertEqual(reward, -5, f"step counter incorrectly ignored when bouncing off a boundary")
+        _, _, _ = self.hunting_ground.take_step(self.hunting_ground.Direction.RIGHT)
+        _, _, _ = self.hunting_ground.take_step(self.hunting_ground.Direction.RIGHT)
+        _, _, _ = self.hunting_ground.take_step(self.hunting_ground.Direction.DOWN)
+        reward, done, _ = self.hunting_ground.take_step(self.hunting_ground.Direction.DOWN)
+        self.assertEqual(reward, 91, f"treasure reward incorrectly returned")
+        self.assertTrue(done, f"finished episode incorrectly reported")
 
     def test_reset_prize(self) -> None:
 
