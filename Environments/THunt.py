@@ -26,6 +26,7 @@ def get_in_bounds(location: tuple([int, int]), bounds: tuple[int, int]) -> tuple
 
     return tuple(output_location)
 
+
 class TreasureHunt:
 
     class Direction(Enum):
@@ -68,8 +69,16 @@ class TreasureHunt:
                          TreasureHunt.Direction.DOWN: (0, 1),
                          TreasureHunt.Direction.LEFT: (-1, 0),
                          TreasureHunt.Direction.RIGHT: (1, 0)}
+        instruction_tuple = direction_map[action]
+        self.steps_taken += 1
+        self.location = get_in_bounds(tuple(np.add(self.location, instruction_tuple)))
+        done = False
+        reward = self.steps_taken*-1
+        if new_location == self.treasure:
+            done = True
+            reward += 100
 
-        return None
+        return reward, done, self.location
 
     def reset_prize(self, treasure_location: tuple) -> None:
 
