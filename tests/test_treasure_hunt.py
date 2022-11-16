@@ -54,27 +54,33 @@ class TreasureTest(TestCase):
 
         self.assertEqual(self.hunting_ground.steps_taken, 0,
                          f"initialised steps taken should be zero, but {self.hunting_ground.steps_taken} instead")
-        self.assertCountEqual((6, 6), self.hunting_ground.field_dimensions,
-                              f"field dimensions incorrectly initialised, read in as "
-                              f"{self.hunting_ground.field_dimensions}")
-        self.assertCountEqual((3, 3), self.hunting_ground.treasure,
-                              f"treasure misplaced, found in location {self.hunting_ground.treasure}")
-        self.assertCountEqual((1, 1), self.hunting_ground.location,
-                              f"starting square incorrect, found in location {self.hunting_ground.location}")
-
+        self.assertSequenceEqual((6, 6), self.hunting_ground.field_dimensions,
+                                 f"field dimensions incorrectly initialised, read in as "
+                                 f"{self.hunting_ground.field_dimensions}")
+        self.assertSequenceEqual((3, 3), self.hunting_ground.treasure,
+                                 f"treasure misplaced, found in location {self.hunting_ground.treasure}")
+        self.assertSequenceEqual((1, 1), self.hunting_ground.location,
+                                 f"starting square incorrect, found in location {self.hunting_ground.location}")
 
     def test_take_step(self) -> None:
         """
-        tests that a 0 moves up correctly
-        tests that a 1 moves right correctly
-        tests that a 2 moves down correctly
-        tests that a 3 moves left correctly
+        tests that UP moves up correctly
+        tests that DOWN moves right correctly
+        tests that LEFT moves down correctly
+        tests that RIGHT moves left correctly
         tests that a move into a boundary does not move
         tests that a value outside of the correct values does not move
         tests that taking a step returns the correct value
         """
 
-        pass
+        reward, done, location = self.hunting_ground.take_step(self.hunting_ground.Direction.RIGHT)
+        self.assertFalse(done, f"episode returned as finished when incomplete")
+        self.assertEqual(reward, -1, f"step counter incorrect")
+        self.assertSequenceEqual((2, 1), location, "Right move taken incorrectly")
+        _, _, location = self.hunting_ground.take_step(self.hunting_ground.Direction.DOWN)
+        self.assertSequenceEqual((2, 2), location, f"Down move taken incorrectly")
+        _, _, location = self.hunting_ground.take_step(self.hunting_ground.Direction.LEFT)
+        self.assertSequenceEqual((2, 2), location, f"Left move taken incorrectly")
 
     def test_reset_prize(self) -> None:
 

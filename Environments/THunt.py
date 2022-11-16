@@ -71,10 +71,10 @@ class TreasureHunt:
                          TreasureHunt.Direction.RIGHT: (1, 0)}
         instruction_tuple = direction_map[action]
         self.steps_taken += 1
-        self.location = get_in_bounds(tuple(np.add(self.location, instruction_tuple)))
+        self.location = get_in_bounds(tuple(np.add(self.location, instruction_tuple)), self.field_dimensions)
         done = False
         reward = self.steps_taken*-1
-        if new_location == self.treasure:
+        if self.location == self.treasure:
             done = True
             reward += 100
 
