@@ -102,7 +102,13 @@ class TreasureHunt:
             # randomise location
             self.treasure = tuple(np.random.randint((1, 1), np.add(self.field_dimensions, (1, 1))))
 
-    def get_current_state(self) -> int:
+    def get_current_state(self) -> tuple[int, int]:
+        """
+        returns the current state of the treasure hunt, which is the location
 
-        return None
+        Returns:
+            location: the coordinates of the agent at the present time
+        """
+
+        return self.location
 
