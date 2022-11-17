@@ -3,7 +3,7 @@ from copy import deepcopy
 from enum import Enum
 
 
-def get_in_bounds(location: tuple([int, int]), bounds: tuple[int, int]) -> tuple([int, int]):
+def get_in_bounds(location: tuple([int, int]), bounds: tuple([int, int])) -> tuple([int, int]):
     """
     determines if a location is within 1 and the upper bounds given by bounds.
     If the value is outside of those bounds, it is moved the shortest distance
@@ -51,7 +51,7 @@ class TreasureHunt:
         self.location = (1, 1)
         self.steps_taken = 0
 
-    def take_step(self, action: Direction) -> (int, bool, tuple[int, int]):
+    def take_step(self, action: Direction) -> (int, bool, tuple([int, int])):
         """
         takes a step in the specified direction. increments the number of steps taken
         and returns the prize amount
@@ -80,7 +80,7 @@ class TreasureHunt:
 
         return reward, done, self.location
 
-    def reset(self, treasure_location: tuple[int, int] = None) -> None:
+    def reset(self, treasure_location: tuple([int, int]) = None) -> None:
         """
         Resets the environment, resetting the steps taken, the agent location and the treasure location.
         If a treasure location is given, and is within the acceptable bounds, then the treasure is
@@ -102,7 +102,7 @@ class TreasureHunt:
             # randomise location
             self.treasure = tuple(np.random.randint((1, 1), np.add(self.field_dimensions, (1, 1))))
 
-    def get_current_state(self) -> tuple[int, int]:
+    def get_current_state(self) -> tuple([int, int]):
         """
         returns the current state of the treasure hunt, which is the location
 
