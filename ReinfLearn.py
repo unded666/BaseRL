@@ -515,14 +515,13 @@ class ERLearn:
 if __name__ == "__main__":
     # debugging code here
     print("I am debugging code! hear me debug!")
-    from Environments import THunt
+    from Environments.THunt import TreasureHunt
     RL = ERLearn()
-    TH = THunt()
+    TH = TreasureHunt()
     A = [0, 1, 2, 3]
     SSpace = [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5]]
     RL.set_actions(A)
     RL.set_states(SSpace)
-    THunt.treasure = (3, 3)
     RL.assign_func(TH.take_step)
     RL.assign_reset(TH.reset_prize)
     RL.fetch_state = TH.get_current_state
